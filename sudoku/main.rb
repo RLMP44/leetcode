@@ -1,3 +1,21 @@
+def is_valid_sudoku(board)
+  # set column []
+  # set block []
+  9.times do
+    # choose column index number, starting with 0
+    # set block index number, starting with 0
+    board.each_with_index do |row, index|
+      # check row for 1 - 9, return true or false
+      # use set index number to find column and add to column array
+      # increment index number for next column
+
+      # three times do,
+        # get
+      # reset column array
+    end
+  end
+end
+
 board =
   [['.', '.', '.', '.', '.', '.', '.', '.', '.'],
    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -31,7 +49,7 @@ board3 =
    ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
    ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 
-
+  # ---------------------- RULES ------------------------- #
   # Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
 
   # Each row must contain the digits 1-9 without repetition.
