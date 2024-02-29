@@ -1,15 +1,16 @@
 def is_valid_sudoku(board)
   column = []
   # set block []
-  # set column number
   all_cols_valid = true
   all_rows_valid = true
+  # set column number
   (0..8).to_a.each do |col|
     # go through each row and get number at col index
     (0..8).to_a.each do |row|
       column << board[row][col]
     end
     all_cols_valid = false unless valid_line?(column)
+    # reset column for to prepare for next one
     column = []
   end
   board.each_with_index do |row, index|
