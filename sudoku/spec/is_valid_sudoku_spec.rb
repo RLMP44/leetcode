@@ -11,9 +11,46 @@ BOARD =
    ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
    ['.', '.', '.', '.', '.', '.', '.', '.', '.']]
 
-describe "#valid_row?" do
-  it "should return false if row doesn't have 1-9 and true if it does" do
+BOARD2 =
+  [['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+   ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+   ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+   ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+   ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+   ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+   ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+   ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+   ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
+
+BOARD3 =
+  [['8', '3', '.', '.', '7', '.', '.', '.', '.'],
+   ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+   ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+   ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+   ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+   ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+   ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+   ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+   ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
+
+
+describe '#valid_row?' do
+  it 'should return true if it has no repeated numbers' do
     expect(valid_row?(BOARD[0])).to eq(true)
+    expect(valid_row?(BOARD2[0])).to eq(true)
     expect(valid_row?(BOARD[1])).to eq(false)
+  end
+end
+
+describe '#is_valid_sudoku' do
+  it 'should return true if sudoku board has no repeat numbers in row, column, or block' do
+    expect(is_valid_sudoku(BOARD2)).to eq(true)
+  end
+end
+
+describe "#finished_row?" do
+  it "should return true if row is complete and numbers don't repeat" do
+    expect(finished_row?(BOARD[0])).to eq(true)
+    expect(finished_row?(BOARD[1])).to eq(false)
   end
 end
