@@ -4,14 +4,12 @@ def is_valid_sudoku(board)
   @all_rows_valid = true
   @all_blocks_valid = true
   @block = []
-  iteration = 0
   # set column number
   (0..8).to_a.each do |col|
-    make_column(@column, board, col)
+    make_column(board, col)
     @all_cols_valid = false unless valid_line?(@column)
     # reset column to prepare for next one
     @column = []
-    iteration += 1
   end
   board.each_with_index do |row, index|
     # check row for 1 - 9, return true or false
@@ -50,10 +48,10 @@ def increment(index)
   inc_amount
 end
 
-def make_column(column, board, col)
+def make_column(board, col)
   # go through each row and get number at col index
   (0..8).to_a.each do |row|
-    column << board[row][col]
+    @column << board[row][col]
   end
 end
 
@@ -98,7 +96,7 @@ board3 =
    ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 
 # --------------------- TESTING ------------------------ #
-puts(is_valid_sudoku(board2))
+puts(is_valid_sudoku(board3))
 
 # ---------------------- RULES ------------------------- #
 # Determine if a 9 x 9 Sudoku board is valid.
