@@ -1,30 +1,28 @@
 def is_valid_sudoku(board)
   @column = []
-  @all_cols_valid = true
-  @all_rows_valid = true
-  @all_blocks_valid = true
+  @is_valid = true
   @block = []
   # set column number
   (0..8).to_a.each do |col|
     make_column(board, col)
-    @all_cols_valid = false unless valid_line?(@column)
+    @is_valid = false unless valid_line?(@column)
     # reset column to prepare for next one
     @column = []
   end
   board.each_with_index do |row, index|
     # check row for 1 - 9, return true or false
-    @all_rows_valid = false unless valid_line?(row)
+    @is_valid = false unless valid_line?(row)
     inc_amount = increment(index)
     @block << [board[index][0 + inc_amount], board[index][1 + inc_amount], board[index][2 + inc_amount]]
     handle_block(index)
   end
-  @all_cols_valid && @all_rows_valid && @all_blocks_valid
+  @is_valid
 end
 
 def handle_block(index)
   return unless [2, 5, 8].include?(index)
 
-  @all_blocks_valid = false unless valid_line?(@block.flatten!)
+  @is_valid = false unless valid_line?(@block.flatten!)
   @block = []
 end
 
