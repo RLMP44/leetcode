@@ -58,9 +58,9 @@ describe '#is_valid_sudoku' do
   end
 end
 
-describe '#finished_line?' do
-  it 'should return true if row is complete and numbers do not repeat' do
-    expect(finished_line?(BOARD[0])).to eq(true)
-    expect(finished_line?(BOARD[1])).to eq(false)
-  end
-end
+# describe '#finished_line?' do
+#   it 'should return true if row is complete and numbers do not repeat' do
+#     expect(finished_line?(BOARD[0])).to eq(true)
+#     expect(finished_line?(BOARD[1])).to eq(false)
+#   end
+# end

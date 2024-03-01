@@ -20,6 +20,7 @@ def is_valid_sudoku(board)
 end
 
 def handle_block(index)
+  # validate block only on every 3rd iteration
   return unless [2, 5, 8].include?(index)
 
   @is_valid = false unless valid_line?(@block.flatten!)
@@ -27,7 +28,7 @@ def handle_block(index)
 end
 
 def valid_line?(line)
-  p(line)
+  # checks for any repeat numbers in a given line or block
   repeat = false
   line.each do |num|
     repeat = true if num != '.' && line.count(num) > 1
@@ -36,13 +37,10 @@ def valid_line?(line)
 end
 
 def increment(index)
+  # must only increment after every 3rd iteration
   inc_amount = 0
-  case index
-  when 3
-    inc_amount = 3
-  when 6
-    inc_amount = 6
-  end
+  inc_amount = 3 if index == 3
+  inc_amount = 6 if index == 6
   inc_amount
 end
 
@@ -53,9 +51,9 @@ def make_column(board, col)
   end
 end
 
-def finished_line?(line)
-  line.sort == ('1'..'9').to_a
-end
+# def finished_line?(line)
+#   line.sort == ('1'..'9').to_a
+# end
 
 # --------------------- TEST CASES ----------------------- #
 
@@ -94,7 +92,7 @@ board3 =
    ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 
 # --------------------- TESTING ------------------------ #
-puts(is_valid_sudoku(board3))
+puts(is_valid_sudoku(board2))
 
 # ---------------------- RULES ------------------------- #
 # Determine if a 9 x 9 Sudoku board is valid.
