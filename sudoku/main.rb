@@ -1,28 +1,37 @@
 def is_valid_sudoku(board)
-  p board
-  column = []
-  block = []
-  all_cols_valid = true
-  all_rows_valid = true
-  all_blocks_valid = true
+  @column = []
+  @all_cols_valid = true
+  @all_rows_valid = true
+  @all_blocks_valid = true
+  @block = []
   iteration = 0
   # set column number
   (0..8).to_a.each do |col|
-    make_block(block, board, col, iteration)
-    make_column(column, board, col)
-    all_cols_valid = false unless valid_line?(column)
-    # reset column for to prepare for next one
-    column = []
+    make_column(@column, board, col)
+    @all_cols_valid = false unless valid_line?(@column)
+    # reset column to prepare for next one
+    @column = []
     iteration += 1
   end
-  board.each do |row|
+  board.each_with_index do |row, index|
     # check row for 1 - 9, return true or false
-    all_rows_valid = false unless valid_line?(row)
+    @all_rows_valid = false unless valid_line?(row)
+    inc_amount = increment(index)
+    @block << [board[index][0 + inc_amount], board[index][1 + inc_amount], board[index][2 + inc_amount]]
+    handle_block(index)
   end
-  all_cols_valid && all_rows_valid
+  @all_cols_valid && @all_rows_valid && @all_blocks_valid
+end
+
+def handle_block(index)
+  return unless [2, 5, 8].include?(index)
+
+  @all_blocks_valid = false unless valid_line?(@block.flatten!)
+  @block = []
 end
 
 def valid_line?(line)
+  p(line)
   repeat = false
   line.each do |num|
     repeat = true if num != '.' && line.count(num) > 1
@@ -30,26 +39,15 @@ def valid_line?(line)
   repeat ? false : true
 end
 
-def make_block(block, board, col, iteration)
-  array = []
-  if iteration <= 2
-    array = (0..2)
-  elsif iteration <= 5
-    array = (3..5)
-  else
-    array = (6..8)
+def increment(index)
+  inc_amount = 0
+  case index
+  when 3
+    inc_amount = 3
+  when 6
+    inc_amount = 6
   end
-  puts('make_block')
-  p(block)
-  set_block_rows(block, board, col, array) if [2, 5, 9].include?(iteration)
-end
-
-def set_block_rows(block, board, col, array)
-  puts('block rows')
-  p(block)
-  array.to_a.each do |row|
-    block << board[row][col]
-  end
+  inc_amount
 end
 
 def make_column(column, board, col)
@@ -62,6 +60,8 @@ end
 def finished_line?(line)
   line.sort == ('1'..'9').to_a
 end
+
+# --------------------- TEST CASES ----------------------- #
 
 board = [
   ('1'..'9').to_a,
@@ -98,7 +98,7 @@ board3 =
    ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 
 # --------------------- TESTING ------------------------ #
-puts(is_valid_sudoku(board))
+puts(is_valid_sudoku(board2))
 
 # ---------------------- RULES ------------------------- #
 # Determine if a 9 x 9 Sudoku board is valid.
