@@ -13,14 +13,9 @@ def is_valid_sudoku(board)
     # reset column for to prepare for next one
     column = []
   end
-  board.each_with_index do |row, index|
+  board.each do |row|
     # check row for 1 - 9, return true or false
     all_rows_valid = false unless valid_line?(row)
-    # set block index number, starting with 0
-    # use set index number to find column and add to column array
-    # three times do,
-    # get
-    # reset column array
   end
   all_cols_valid && all_rows_valid
 end
