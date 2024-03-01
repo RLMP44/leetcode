@@ -1,4 +1,5 @@
 def is_valid_sudoku(board)
+  p board
   column = []
   block = []
   all_cols_valid = true
@@ -62,6 +63,18 @@ def finished_line?(line)
   line.sort == ('1'..'9').to_a
 end
 
+board = [
+  ('1'..'9').to_a,
+  ('10'..'18').to_a,
+  ('19'..'27').to_a,
+  ('28'..'36').to_a,
+  ('37'..'45').to_a,
+  ('46'..'54').to_a,
+  ('55'..'63').to_a,
+  ('64'..'72').to_a,
+  ('73'..'81').to_a
+]
+
 board2 =
   [['5', '3', '.', '.', '7', '.', '.', '.', '.'],
    ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
@@ -85,7 +98,7 @@ board3 =
    ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 
 # --------------------- TESTING ------------------------ #
-puts(is_valid_sudoku(board2))
+puts(is_valid_sudoku(board))
 
 # ---------------------- RULES ------------------------- #
 # Determine if a 9 x 9 Sudoku board is valid.
