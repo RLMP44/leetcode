@@ -33,10 +33,33 @@ BOARD3 =
    ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
    ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 
+BOARD4 =
+  [['.', '.', '4', '.', '.', '.', '6', '3', '.'],
+   ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+   ['5', '.', '.', '.', '.', '.', '.', '9', '.'],
+   ['.', '.', '.', '5', '6', '.', '.', '.', '.'],
+   ['4', '.', '3', '.', '.', '.', '.', '.', '1'],
+   ['.', '.', '.', '7', '.', '.', '.', '.', '.'],
+   ['.', '.', '.', '5', '.', '.', '.', '.', '.'],
+   ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+   ['.', '.', '.', '.', '.', '.', '.', '.', '.']]
+
+BOARD5 =
+  [['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+   ['4', '.', '.', '.', '.', '.', '.', '.', '.'],
+   ['.', '.', '.', '.', '.', '.', '6', '.', '.'],
+   ['.', '.', '.', '3', '8', '.', '.', '.', '.'],
+   ['.', '5', '.', '.', '.', '6', '.', '.', '1'],
+   ['8', '.', '.', '.', '.', '.', '.', '6', '.'],
+   ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+   ['.', '.', '7', '.', '9', '.', '.', '.', '.'],
+   ['.', '.', '.', '6', '.', '.', '.', '.', '.']]
+
 ROW = [BOARD2[0][0], BOARD2[0][1], BOARD2[0][2], BOARD2[0][3], BOARD2[0][4], BOARD2[0][5], BOARD2[0][6], BOARD2[0][7], BOARD2[0][8]]
 ROW2 = [BOARD3[0][0], BOARD3[0][1], BOARD3[0][2], BOARD3[0][3], BOARD3[0][4], BOARD3[0][5], BOARD3[0][6], BOARD3[0][7], BOARD3[0][8]]
 COLUMN = [BOARD2[0][0], BOARD2[1][0], BOARD2[2][0], BOARD2[3][0], BOARD2[4][0], BOARD2[5][0], BOARD2[6][0], BOARD2[7][0], BOARD2[8][0]]
 COLUMN2 = [BOARD3[0][0], BOARD3[1][0], BOARD3[2][0], BOARD3[3][0], BOARD3[4][0], BOARD3[5][0], BOARD3[6][0], BOARD3[7][0], BOARD3[8][0]]
+COLUMN3 = [BOARD4[3][0], BOARD4[3][1], BOARD4[3][2], BOARD4[3][3], BOARD4[3][4], BOARD4[3][5], BOARD4[3][6], BOARD4[3][7], BOARD4[3][8]]
 
 describe '#valid_line?' do
   it 'should return true if it has no repeated numbers' do
@@ -47,6 +70,7 @@ describe '#valid_line?' do
     expect(valid_line?(ROW2)).to eq(true)
     expect(valid_line?(COLUMN)).to eq(true)
     expect(valid_line?(COLUMN2)).to eq(false)
+    expect(valid_line?(COLUMN3)).to eq(false)
   end
 end
 
@@ -55,6 +79,8 @@ describe '#is_valid_sudoku' do
     expect(is_valid_sudoku(BOARD)).to eq(false)
     expect(is_valid_sudoku(BOARD2)).to eq(true)
     expect(is_valid_sudoku(BOARD3)).to eq(false)
+    expect(is_valid_sudoku(BOARD4)).to eq(false)
+    expect(is_valid_sudoku(BOARD5)).to eq(true)
   end
 end
 
