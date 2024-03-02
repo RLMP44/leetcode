@@ -3,25 +3,46 @@ def is_valid_sudoku(board)
   @is_valid = true
   @block = []
   board.each_with_index do |row, index|
-    make_column(board, index)
-    @is_valid = false unless valid_line?(@column)
-    # check row for 1 - 9, return true or false
     @is_valid = false unless valid_line?(row)
-    inc_amount = increment(index)
-    @block << [board[index][0 + inc_amount], board[index][1 + inc_amount], board[index][2 + inc_amount]]
-    handle_block(index)
-    # reset column to prepare for next one
-    @column = []
+    handle_column(board, index)
+    handle_block(board, index)
   end
   @is_valid
 end
 
-def handle_block(index)
+def handle_column(board, index)
+  make_column(board, index)
+  @is_valid = false unless valid_line?(@column)
+  @column = []
+end
+
+def make_column(board, row)
+  # receive a row index, assign column number using 0-8
+  (0..8).to_a.each do |col|
+    @column << board[row][col]
+  end
+end
+
+def handle_block(board, index)
+  make_block(board, index)
   # validate block only on every 3rd iteration
   return unless [2, 5, 8].include?(index)
 
   @is_valid = false unless valid_line?(@block.flatten!)
   @block = []
+end
+
+def make_block(board, index)
+  inc_amount = increment(index)
+  @block << [board[index][0 + inc_amount], board[index][1 + inc_amount], board[index][2 + inc_amount]]
+end
+
+def increment(index)
+  # method for blocks, must only increment after every 3rd iteration
+  inc_amount = 0
+  inc_amount = 3 if index == 3
+  inc_amount = 6 if index == 6
+  inc_amount
 end
 
 def valid_line?(line)
@@ -31,21 +52,6 @@ def valid_line?(line)
     repeat = true if num != '.' && line.count(num) > 1
   end
   repeat ? false : true
-end
-
-def increment(index)
-  # must only increment after every 3rd iteration
-  inc_amount = 0
-  inc_amount = 3 if index == 3
-  inc_amount = 6 if index == 6
-  inc_amount
-end
-
-def make_column(board, row)
-  # receive a row index, assign column number using 0-8
-  (0..8).to_a.each do |col|
-    @column << board[row][col]
-  end
 end
 
 # def finished_line?(line)
