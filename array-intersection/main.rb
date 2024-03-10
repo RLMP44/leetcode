@@ -4,7 +4,7 @@
 def intersection(nums1, nums2)
   intersect = []
   nums1.each do |num|
-      intersect << num if nums2.include?(num)
+      intersect << num if nums2.include?(num) && !intersect.include?(num)
   end
   intersect
 end
