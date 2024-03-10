@@ -30,7 +30,7 @@ end
 def valid_line?(line)
   # checks for any repeat numbers in a given line or block
   repeat = false
-  line.each do |num|
+  for num in line
     repeat = true if num != '.' && line.count(num) > 1
   end
   repeat ? false : true
@@ -46,7 +46,7 @@ end
 
 def make_column(board, row)
   # receive a row index, assign column number using 0-8, swap order to get column instead of row
-  (0..8).to_a.each do |col|
+  for col in (0..8).to_a
     @column << board[col][row]
   end
 end
