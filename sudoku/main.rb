@@ -11,16 +11,19 @@ def set_vars
   @block = []
   @block_column = 0
   @iteration = 1
+  @increment = 0
 end
 
 def handle_row_and_col(board)
   board.each_with_index do |row, index|
     validity_set(row)
+    p("row is #{@is_valid}")
     handle_column(board, index)
   end
 end
 
 def validity_set(input)
+  # @is_valid only changes if one input is false
   @is_valid = false unless valid_line?(input)
 end
 
@@ -34,8 +37,10 @@ def valid_line?(line)
 end
 
 def handle_column(board, index)
+  # makes a column, checks if it is valid, updates @is_valid, then resets @column
   make_column(board, index)
   validity_set(@column)
+  p("column is #{@is_valid}")
   @column = []
 end
 
@@ -47,6 +52,7 @@ def make_column(board, row)
 end
 
 def handle_block(board)
+  # goes over three main columns of 3x3 blocks, making 3 blocks at a time
   3.times do
     new_block(board)
     @block_column += 3
@@ -54,8 +60,8 @@ def handle_block(board)
   end
 end
 
-@increment = 0
 def new_block(board)
+  # creates a column with 3 3x3 blocks
   9.times do
     @block << board.flatten[(0 + @block_column + @increment)..(2 + @block_column + @increment)]
     execute_block
@@ -64,9 +70,11 @@ def new_block(board)
 end
 
 def execute_block
+  # when a 3x3 block is made, check and set its validity, then reset the block
   return unless @block.count == 3
 
   validity_set(@block.flatten)
+  p("block is #{@is_valid}")
   @block = []
 end
 
@@ -129,7 +137,7 @@ board5 =
    ['.', '.', '.', '6', '.', '.', '.', '.', '.']]
 
 # --------------------- TESTING ------------------------ #
-puts(is_valid_sudoku(board))
+puts(is_valid_sudoku(board4))
 
 # ---------------------- RULES ------------------------- #
 # Determine if a 9 x 9 Sudoku board is valid.
