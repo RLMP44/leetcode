@@ -2,33 +2,11 @@
 # @param {Integer} target
 # @return {Integer[]}
 def two_sum(nums, target)
-  # indexes = nums.each_with_index.map do |num, index|
-  #   nums.each_with_index do |n, i|
-  #     return [index, i] if index != i && num + n == target
-  #   end
-  # end
-  # indexes
-
   # for num in nums
   #   nums.each_with_index do |n, i|
   #     return [nums.index(num), i] if nums.index(num) != i && num + n == target
   #   end
   # end
-
-  # checked = {}
-  # hash = {}
-  # nums.each_with_index.map do |num, index|
-  #   hash[index] = num
-  # end
-  # for num in hash.values
-  #   if checked[target - num] && hash.key(target - num) != hash.key(num)
-  #     return [hash.key(target - num), hash.key(num)]
-  #   else
-  #     checked[hash.key(target - num)] = num
-  #   end
-  # end
-  # return checked.keys
-
 
   checked = {}
   nums.each_with_index do |num, index|
