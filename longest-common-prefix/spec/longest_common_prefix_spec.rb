@@ -8,5 +8,6 @@ describe '#longest_common_prefix' do
     expect(longest_common_prefix(['a'])).to eq('a')
     expect(longest_common_prefix(['', ''])).to eq('')
     expect(longest_common_prefix(['reflower','flow','flight'])).to eq('')
+    expect(longest_common_prefix(['flower','flower', 'flower', 'flower'])).to eq('flower')
   end
 end
