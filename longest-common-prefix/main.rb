@@ -11,9 +11,9 @@ def longest_common_prefix(strs)
 end
 
 def compare(strs)
-  for string in strs
-    for str in strs
-      compare_word(string, str)
+  strs.each_with_index do |string, index|
+    strs.each_with_index do |str, i|
+      compare_word(string, str) if index != i
       reset_current_common
     end
   end
@@ -26,8 +26,6 @@ def same_first_letter?(strs)
 end
 
 def compare_word(string, str)
-  return unless string != str
-
   string.chars.each_with_index do |letter, index|
     break unless string[index] == str[index]
 
