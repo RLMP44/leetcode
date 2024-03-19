@@ -2,11 +2,12 @@ def length_of_longest_substring(s)
   @substring = 0
   @list = ''
   run(s.chars)
+  @substring
 end
 
 def run(s)
-  s.each_with_index do |character, index|
-    handle_repeat(character, index) if repeat?(character)
+  for character in s
+    handle_repeat(character) if repeat?(character)
     add_to_list(character)
     update_substring
   end
@@ -24,17 +25,10 @@ def repeat?(character)
   @list.include?(character)
 end
 
-def handle_repeat(character, index)
+def handle_repeat(character)
   # find index of repeat in list (should just be one) and split at index
   repeat_index = @list.index(character)
-  p("repeat at #{repeat_index}")
-  p("current index is #{index}")
-  diff = index - repeat_index
-  @substring = diff if diff > @substring
-  i = index + 1
-  p(@list)
-  p(@list[i..])
-  @list = @list[(index + 1)..]
+  @list = @list[(repeat_index + 1)..]
 end
 
  # When repeat, subtract index of first letter from index of current,
