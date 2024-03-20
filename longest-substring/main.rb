@@ -6,6 +6,7 @@ def length_of_longest_substring(s)
 end
 
 def run(s)
+  # for loop has shorter runtime than .each method
   for character in s
     handle_repeat(character) if repeat?(character)
     add_to_list(character)
@@ -26,17 +27,15 @@ def repeat?(character)
 end
 
 def handle_repeat(character)
-  # find index of repeat in list (should just be one) and split at index
+  # find index of repeat in list (should just be one)
   repeat_index = @list.index(character)
+  # reset array starting after index of first instance of repeat
   @list = @list[(repeat_index + 1)..]
 end
 
- # When repeat, subtract index of first letter from index of current,
- # then delete all elements from array before and including first letter array[..index]
+p(length_of_longest_substring('abcabcbb'))
 
-p(length_of_longest_substring("abcabcbb"))
-
-# end actions
+# ----------------------- end actions -------------------------- #
 # always add new character to list
 # if repeat, reset list to start after first instance of repeat
 # adjust @substring
