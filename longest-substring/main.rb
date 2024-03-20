@@ -6,7 +6,7 @@ def length_of_longest_substring(s)
 end
 
 def run(s)
-  # for loop has shorter runtime than .each method
+  # for loop has shorter runtime compared to .each method
   for character in s
     handle_repeat(character) if repeat?(character)
     add_to_list(character)
