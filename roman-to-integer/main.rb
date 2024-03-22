@@ -20,15 +20,19 @@ NEXT = {
 def roman_to_int(s)
   integer = 0
   s.chars.each_with_index do |char, index|
-    reduce_next_letter(char, index) if NEXT.keys.include?(char) && NEXT[char].include?(s[index + 1])
-    integer += HASH[char]
+    if need_reduce?(char, s, index)
+      integer += -HASH[char]
+    else
+      integer += HASH[char]
+    end
   end
   integer
 end
 
-def reduce_next_letter(char, index)
- p('reduce')
+def need_reduce?(char, s, index)
+  NEXT.keys.include?(char) && NEXT[char].include?(s[index + 1])
 end
+
 
 # have a string
 # iterate
