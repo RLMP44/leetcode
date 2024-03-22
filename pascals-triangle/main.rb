@@ -1,8 +1,8 @@
 # @param {Integer} num_rows
 # @return {Integer[][]}
 
-ROWS = []
 def generate(num_rows)
+  rows = []
   new_row = []
   initial_num = 1
   (1..num_rows).each_with_index do |row, index|
@@ -12,19 +12,16 @@ def generate(num_rows)
     when 1
       new_row = [initial_num, initial_num] if index == 1
     else
-      new_row << ROWS[index - 1][0]
+      new_row << rows[index - 1][0]
       (0..index - 2).each do |num|
-        new_row << ROWS[index - 1][num] + ROWS[index - 1][num + 1]
+        new_row << rows[index - 1][num] + rows[index - 1][num + 1]
       end
-      new_row << ROWS[index - 1][-1]
+      new_row << rows[index - 1][-1]
     end
-    p(ROWS)
-    ROWS << new_row
-    p(ROWS)
+    rows << new_row
     new_row = []
   end
-  p(ROWS)
-  ROWS
+  rows
 end
 
 p(generate(1))
