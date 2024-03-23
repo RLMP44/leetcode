@@ -1,5 +1,16 @@
 def my_sqrt(x)
+  @next_odd_num = 1
+  @square = 0
+  reduce(x)
+  @square
+end
 
+def reduce(x)
+  until x < @next_odd_num do
+    x -= @next_odd_num
+    @next_odd_num += 2
+    @square += 1
+  end
 end
 
 # ------------------ TESTS --------------------- #
