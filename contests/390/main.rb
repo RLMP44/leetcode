@@ -5,17 +5,23 @@
 # @param {String} s
 # @return {Integer}
 def maximum_length_substring(s)
-  substring = ''
-  longest = 0
+  @substring = ''
+  @longest = 0
   s.chars.each do |char|
-    if substring.count(char) >= 2
-      restart_index = substring.index(char)
-      substring = substring[restart_index + 1..]
-    end
-    substring += char
-    longest = substring.size if substring.size > longest
+    handle_excess(char) if over_two?(char)
+    @substring += char
+    @longest = @substring.size if @substring.size > @longest
   end
-  longest
+  @longest
+end
+
+def over_two?(char)
+  @substring.count(char) >= 2
+end
+
+def handle_excess(char)
+  restart_index = @substring.index(char)
+  @substring = @substring[restart_index + 1..]
 end
 
 p(maximum_length_substring('ccbcb'))
