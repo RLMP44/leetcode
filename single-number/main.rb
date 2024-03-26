@@ -1,6 +1,9 @@
 # @param {Integer[]} nums
 # @return {Integer}
 def single_number(nums)
-  non_duplicate = nums.select { |num| nums.count(num) == 1 }
-  non_duplicate[0]
+  hash = {}
+  nums.each do |num|
+    hash[num] ? hash[num] += 1 : hash[num] = 1
+  end
+  hash.key(1)
 end
