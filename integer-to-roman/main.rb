@@ -25,14 +25,14 @@ NEXT = {
 
 def int_to_roman(num)
   string = ''
-  individual = num.to_s.chars
-  individual.each_with_index do |number, index|
+  split_nums = num.to_s.chars
+  split_nums.each_with_index do |number, index|
     number = number.to_i
     if [1, 5].include?(number)
-      string += HASH[number * set_multiplier(individual, index)]
+      string += HASH[number * set_multiplier(split_nums, index)]
     elsif [4, 9].include?(number)
       p('elsif')
-      # string += (HASH.key(number * set_multiplier(individual, index)).to_s)
+      # string += (HASH.key(number * set_multiplier(split_nums, index)).to_s)
     else
       p('else')
     end
@@ -40,8 +40,8 @@ def int_to_roman(num)
   string
 end
 
-def set_multiplier(individual, index)
-  MULTIPLIER[individual[index..].size]
+def set_multiplier(split_nums, index)
+  MULTIPLIER[split_nums[index..].size]
 end
 
 p(int_to_roman(1111))
