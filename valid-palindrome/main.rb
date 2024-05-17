@@ -7,7 +7,6 @@ def reformat(string)
   string.downcase.strip.gsub(/[^a-z0-9]/i, '')
 end
 
-
-puts(is_palindrome("A man, a plan, a canal: Panama"))
-puts(is_palindrome("race a car"))
-puts(is_palindrome(" "))
+puts(is_palindrome('A man, a plan, a canal: Panama'))
+puts(is_palindrome('race a car'))
+puts(is_palindrome(' '))
