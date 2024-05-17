@@ -4,7 +4,7 @@ def is_palindrome(s)
 end
 
 def reformat(string)
-  string.downcase.strip.gsub(/[^a-z0-9]/i, '')
+  string.downcase.strip.gsub(/[^a-z0-9]/, '')
 end
 
 puts(is_palindrome('A man, a plan, a canal: Panama'))
