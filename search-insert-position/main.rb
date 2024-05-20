@@ -3,10 +3,8 @@ def search_insert(nums, target)
 end
 
 def insert_index(nums, target)
-  point = nums.select do |num|
-    num < target
-  end
-  index = nums.index(point[-1])
+  last_lesser_number = nums.select { |num| num < target }
+  index = nums.index(last_lesser_number[-1])
   index ? index + 1 : 0
 end
 
