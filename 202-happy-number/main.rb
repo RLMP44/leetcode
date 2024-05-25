@@ -1,24 +1,32 @@
 def is_happy(n)
-  @loop = 1
-  @number = n
-  return true if n == 1
+  seen = []
+  num = n
+  loop do
+    new_num = calculate(num)
+    return true if new_num == 1
+    return false if seen.include?(new_num)
 
-  while @number != 1 && @loop < 8
-    squares = convert(@number.to_s.chars)
-    new_number = squares.sum
-    adjust_starters(new_number)
+    seen << new_num
+    num = new_num
   end
-  new_number == 1
+  new_num == 1
 end
 
-def convert(digits)
-  digits.map do |num|
-    num = num.to_i
-    num * num
-  end
+def calculate(n)
+  squares = n.digits.map { |num| num * num }
+  squares.sum
 end
 
-def adjust_starters(new_number)
-  @number = new_number
-  @loop += 1
-end
+p is_happy(19)
+
+# def convert(digits)
+#   digits.map do |num|
+#     num = num.to_i
+#     num * num
+#   end
+# end
+
+# def adjust_starters(new_number)
+#   @number = new_number
+#   @loop += 1
+# end
