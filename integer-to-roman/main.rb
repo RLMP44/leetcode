@@ -7,7 +7,7 @@ HASH = {
   50 => 'L',
   100 => 'C',
   500 => 'D',
-  1000 => 'M',
+  1000 => 'M'
 }
 
 MULTIPLIER = {
@@ -17,10 +17,13 @@ MULTIPLIER = {
   4 => 1000
 }
 
-NEXT = {
-  'I' => ['V', 'X'],
-  'X' => ['L', 'C'],
-  'C' => ['D', 'M']
+PREVIOUS = {
+  'V' => 'I',
+  'X' => 'I',
+  'L' => 'X',
+  'C' => 'X',
+  'D' => 'C',
+  'M' => 'C'
 }
 
 def int_to_roman(num)
@@ -31,15 +34,16 @@ def int_to_roman(num)
     if [1, 5].include?(number)
       string += HASH[number * set_multiplier(split_nums, index)]
     elsif [4, 9].include?(number)
-      p('elsif')
-      p(number * set_multiplier(split_nums, index))
-      # string += (number * set_multiplier(split_nums, index))
+      add = ''
+      add = '0' if number > 4
+      p(add)
+      string += PREVIOUS[HASH[(set_multiplier(split_nums, index).to_s + '0').to_i]]
     elsif number < 5
-      number.times { string += HASH[1 * set_multiplier(split_nums, index)] }
+      number.times { string += HASH[set_multiplier(split_nums, index)] }
     elsif number > 5
       string += HASH[5 * set_multiplier(split_nums, index)]
       (number - 5).times {
-        string += HASH[1 * set_multiplier(split_nums, index)]
+        string += HASH[set_multiplier(split_nums, index)]
       }
     end
   end
@@ -50,7 +54,7 @@ def set_multiplier(split_nums, index)
   MULTIPLIER[split_nums[index..].size]
 end
 
-p(int_to_roman(1883))
+p(int_to_roman(483))
 
 # check length of number
 # check if 5 or 1
