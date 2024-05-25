@@ -1,12 +1,21 @@
 def is_happy(n)
+  loop = 1
+  number = n
+  return true if n == 1
 
+  while number != 1 && loop < 8
+    digits = number.to_s.chars
+    squares = convert(digits)
+    new_number = squares.sum
+    number = new_number
+    loop += 1
+  end
+  new_number == 1
 end
 
-# Write an algorithm to determine if a number n is happy.
-
-# A happy number is a number defined by the following process:
-
-# Starting with any positive integer, replace the number by the sum of the squares of its digits.
-# Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
-# Those numbers for which this process ends in 1 are happy.
-# Return true if n is a happy number, and false if not.
+def convert(digits)
+  digits.map do |num|
+    num = num.to_i
+    num * num
+  end
+end
