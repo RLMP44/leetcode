@@ -28,44 +28,13 @@ PREVIOUS = {
 
 def int_to_roman(num)
   @string = ''
-  calculate(num.to_s.chars)
-  @string
-end
-
-def set_multiplier(split_nums, index)
-  MULTIPLIER[split_nums[index..].size]
-end
-
-def calculate(split_nums)
+  split_nums = num.to_s.chars
   split_nums.each_with_index do |number, index|
     number = number.to_i
     @base_number = set_base_number(number)
-    if [1, 5].include?(number)
-      @string += first_numeral(split_nums, index)
-    elsif [4, 9].include?(number)
-      @string += PREVIOUS[first_numeral(split_nums, index)]
-      @string += first_numeral(split_nums, index)
-    elsif number < 5
-      number.times { @string += repeat_numerals(split_nums, index) }
-    elsif number > 5
-      @string += first_numeral(split_nums, index)
-      (number - 5).times do
-        @string += repeat_numerals(split_nums, index)
-      end
-    end
+    assign_numerals(number, split_nums, index)
   end
-end
-
-def repeat_numerals(split_nums, index)
-  HASH[set_multiplier(split_nums, index)]
-end
-
-def first_numeral(split_nums, index)
-  HASH[@base_number * set_multiplier(split_nums, index)]
-end
-
-def calculated(split_nums, index)
-  HASH[(@adjusted_base * set_multiplier(split_nums, index))]
+  @string
 end
 
 def set_base_number(number)
@@ -80,8 +49,37 @@ def set_base_number(number)
   end
 end
 
-p(int_to_roman(483))
+def assign_numerals(number, split_nums, index)
+  if [1, 5].include?(number)
+    @string += first_numeral(split_nums, index)
+  elsif [4, 9].include?(number)
+    @string += PREVIOUS[first_numeral(split_nums, index)] + first_numeral(split_nums, index)
+  elsif number < 5
+    under_five(number, split_nums, index)
+  elsif number > 5
+    @string += first_numeral(split_nums, index)
+    over_five(number, split_nums, index)
+  end
+end
 
-# check length of number
-# check if 5 or 1
-# check if 4 or 9
+def first_numeral(split_nums, index)
+  HASH[@base_number * set_multiplier(split_nums, index)]
+end
+
+def set_multiplier(split_nums, index)
+  MULTIPLIER[split_nums[index..].size]
+end
+
+def under_five(number, split_nums, index)
+  number.times { @string += repeat_numerals(split_nums, index) }
+end
+
+def over_five(number, split_nums, index)
+  (number - 5).times { @string += repeat_numerals(split_nums, index) }
+end
+
+def repeat_numerals(split_nums, index)
+  HASH[set_multiplier(split_nums, index)]
+end
+
+p(int_to_roman(483))
