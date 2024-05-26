@@ -34,17 +34,15 @@ def int_to_roman(num)
     if [1, 5].include?(number)
       string += HASH[number * set_multiplier(split_nums, index)]
     elsif [4, 9].include?(number)
-      add = ''
-      add = '0' if number > 4
-      p(add)
-      string += PREVIOUS[HASH[(set_multiplier(split_nums, index).to_s + '0').to_i]]
+      string += PREVIOUS[HASH[((number + 1) * set_multiplier(split_nums, index))]]
+      string += HASH[((number + 1) * set_multiplier(split_nums, index))]
     elsif number < 5
       number.times { string += HASH[set_multiplier(split_nums, index)] }
     elsif number > 5
       string += HASH[5 * set_multiplier(split_nums, index)]
-      (number - 5).times {
+      (number - 5).times do
         string += HASH[set_multiplier(split_nums, index)]
-      }
+      end
     end
   end
   string

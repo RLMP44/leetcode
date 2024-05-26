@@ -18,5 +18,6 @@ describe '#int_to_roman' do
     expect(int_to_roman(4)).to eq('IV')
     expect(int_to_roman(49)).to eq('XLIX')
     expect(int_to_roman(944)).to eq('CMXLIV')
+    expect(int_to_roman(483)).to eq('CDLXXXIII')
   end
 end
